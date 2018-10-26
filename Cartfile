@@ -1,2 +1,2 @@
-github "mxcl/PromiseKit" ~> 6.0
+github "PromiseKit/CorePromise" ~> 6.0
 github "PromiseKit/Foundation" ~> 3.0
