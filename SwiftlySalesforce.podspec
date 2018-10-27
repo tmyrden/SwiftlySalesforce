@@ -22,6 +22,7 @@ s.summary          = "The swiftest way to build iOS apps that connect to Salesfo
 
   }
 
-  s.dependency 'PromiseKit', '~> 6.0'
+  s.dependency 'PromiseKit/CorePromise', '~> 6.0'
+  s.dependency 'PromiseKit/Foundation', '~> 6.0'
 
 end

@@ -21,7 +21,10 @@
   "resource_bundles": {
   },
   "dependencies": {
-    "PromiseKit": [
+    "PromiseKit/CorePromise": [
+      "~> 6.0"
+    ],
+    "PromiseKit/Foundation": [
       "~> 6.0"
     ]
   }
