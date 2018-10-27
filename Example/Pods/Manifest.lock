@@ -4,7 +4,7 @@ PODS:
     - PromiseKit/CorePromise
   - SwiftlySalesforce (7.1.4):
     - PromiseKit/CorePromise (~> 6.0)
-    - PromiseKit/Foundation (~> 6.0)
+    - PromiseKit/Foundation
 
 DEPENDENCIES:
   - SwiftlySalesforce (from `../`)
@@ -19,7 +19,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
-  SwiftlySalesforce: c4a7f9d0b94f9d453c05513f8b9bb0e5ddc3f4b2
+  SwiftlySalesforce: 9d0db0d87cf500fb7a4c8a06ba560db8bd58602d
 
 PODFILE CHECKSUM: 3f0fdd286522f278d73fd708adae9b5962c3bd3e
 

@@ -25,7 +25,7 @@
       "~> 6.0"
     ],
     "PromiseKit/Foundation": [
-      "~> 6.0"
+
     ]
   }
 }
