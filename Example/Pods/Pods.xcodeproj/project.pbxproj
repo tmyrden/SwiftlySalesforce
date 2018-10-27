@@ -266,6 +266,7 @@
 		E4C224120957FB1BF785D436FEE1891F /* Pods-SwiftlySalesforce_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftlySalesforce_Example-frameworks.sh"; sourceTree = "<group>"; };
 		E7A5697AAB18E42DAD9EE8CFAD89B78B /* Pods-SwiftlySalesforce_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwiftlySalesforce_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E86F0EEECF5E86400EDD2F2A3E4E43F7 /* URLRequest+URLRequestConvertible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "URLRequest+URLRequestConvertible.swift"; sourceTree = "<group>"; };
+		EADA0E8D2183F8BC00CF5FD4 /* PMKFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PMKFoundation.framework; path = ../../Carthage/Build/iOS/PMKFoundation.framework; sourceTree = "<group>"; };
 		EBA0823419954654E89B5C0D270F4FD2 /* SwiftlySalesforce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftlySalesforce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED4AE0E9A4EFF2560BFA3A90EFB98339 /* Salesforce+Configuration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Salesforce+Configuration.swift"; sourceTree = "<group>"; };
 		EE45835539718AE1F15F89B7FC69541F /* Pods_SwiftlySalesforce_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlySalesforce_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,8 +292,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				523D11987D9CA0B1FBBD0FB30E072B4F /* Foundation.framework in Frameworks */,
 				BADD121124019E6013903CFE781BC52F /* PromiseKit.framework in Frameworks */,
+				523D11987D9CA0B1FBBD0FB30E072B4F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +477,7 @@
 		C69F30C9FE05B37836E697D7128DA24B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EADA0E8D2183F8BC00CF5FD4 /* PMKFoundation.framework */,
 				2FC8EFF828D027F8BD1B3ACD578CA6F2 /* PromiseKit.framework */,
 				0E2BB5B3689822B3F2F04299E05D70C4 /* iOS */,
 			);
@@ -699,9 +701,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7171ADFD2866E351FBF98C228433D58B /* Build configuration list for PBXNativeTarget "PromiseKit" */;
 			buildPhases = (
-				5A87A6720B9F3DBA4B921C30256ECE63 /* Headers */,
 				BCD7526FB0BAAC95F21978A58C24D12B /* Sources */,
 				7B18EF874D6B5EF67AE65D0AD418B518 /* Frameworks */,
+				5A87A6720B9F3DBA4B921C30256ECE63 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -716,9 +718,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B434F43C48F8528E92A1F6BCFDDA73E /* Build configuration list for PBXNativeTarget "SwiftlySalesforce" */;
 			buildPhases = (
-				A3C579C7CD81A7E45DBDBBF69D969C96 /* Headers */,
 				F33057202658D8F4CD7F2E1E5A6B9880 /* Sources */,
 				8EE86A9EC356DE93805867ED6A29E52F /* Frameworks */,
+				A3C579C7CD81A7E45DBDBBF69D969C96 /* Headers */,
 			);
 			buildRules = (
 			);

@@ -8,6 +8,7 @@
 
 import Foundation
 import PromiseKit
+import PromiseKit.PMKFoundation
 
 public extension Salesforce {
 		
