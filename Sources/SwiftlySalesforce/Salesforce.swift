@@ -12,16 +12,14 @@ open class Salesforce {
     
     // MARK: - Member variables -
     
-    public var user: User? {
-        return designatedUser ?? credentialStore.lastStoredUser
-    }
+    public internal(set) var user: User?
+    
     public var credential: Credential? {
         guard let u = user, let cred = credentialStore.retrieve(for: u) else {
             return nil
         }
         return cred
     }
-    private var designatedUser: User? = nil
     
     // MARK: - Constants -
     
@@ -38,7 +36,7 @@ open class Salesforce {
         public var retries: Int
         
         public static let shared = RequestConfig(
-            version: "47.0",
+            version: "48.0",
             session: URLSession.shared,
             authenticateIfRequired: true,
             retries: 0
@@ -47,26 +45,21 @@ open class Salesforce {
      
     // MARK: - Initializers -
     
-    public init(connectedApp: ConnectedApp, oAuthManager: OAuthManager, user: User? = nil) {
+    public init(connectedApp: ConnectedApp, oAuthManager: OAuthManager, user: User? = nil, defaultUser: Bool = true) {
         self.oAuthManager = oAuthManager
         self.credentialStore = CredentialStore(for: connectedApp)
-        self.designatedUser = user
+        self.user = user ?? (defaultUser ? self.credentialStore.lastStoredUser : nil)
     }
     
-    convenience public init(connectedApp: ConnectedApp, oAuthHostname: String = "login.salesforce.com", user: User? = nil) {
+    convenience public init(connectedApp: ConnectedApp, oAuthHostname: String = "login.salesforce.com", user: User? = nil, defaultUser: Bool = true) {
         let oAuthManager = OAuthManager(connectedApp: connectedApp, hostname: oAuthHostname)
-        self.init(connectedApp: connectedApp, oAuthManager: oAuthManager, user: user)
+        self.init(connectedApp: connectedApp, oAuthManager: oAuthManager, user: user, defaultUser: defaultUser)
     }
     
-    /// This is the initializer you'll probably use most.
-    /// - Parameter consumerKey: Connected App's consumer key. See [Connected Apps](https://help.salesforce.com/articleView?id=connected_app_overview.htm&type=5)
-    /// - Parameter callbackURL: Connected App's callback URL See [Connected Apps](https://help.salesforce.com/articleView?id=connected_app_overview.htm&type=5)
-    /// - Parameter oAuthHostname: optional; hostname for OAuth authentication. Default is "login.salesforce.com". For sandbox orgs use "test.salesforce.com" or for a custom domain use, for example "somethingReallycool.my.salesforce.com". See [Customize Your Login Process with My Domain](https://trailhead.salesforce.com/en/content/learn/modules/identity_login/identity_login_my_domain)
-    /// - Parameter user: optional; the User who will interact with Salesforce
-    convenience public init(consumerKey: String, callbackURL: URL, oAuthHostname: String = "login.salesforce.com", user: User? = nil) {
+    convenience public init(consumerKey: String, callbackURL: URL, oAuthHostname: String = "login.salesforce.com", user: User? = nil, defaultUser: Bool = true) {
         let connectedApp = ConnectedApp(consumerKey: consumerKey, callbackURL: callbackURL)
         let oAuthManager = OAuthManager(connectedApp: connectedApp, hostname: oAuthHostname)
-        self.init(connectedApp: connectedApp, oAuthManager: oAuthManager, user: user)
+        self.init(connectedApp: connectedApp, oAuthManager: oAuthManager, user: user, defaultUser: defaultUser)
     }
     
     // MARK: - Methods -

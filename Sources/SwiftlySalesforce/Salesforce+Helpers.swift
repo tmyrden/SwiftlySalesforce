@@ -112,6 +112,7 @@ extension Salesforce {
         }
         .map { (newCred) -> Credential in
             // Store new credential securely and publish it
+            self.user = User(userID: newCred.userID, orgID: newCred.orgID)
             try? self.credentialStore.store(newCred)
             return newCred
         }
