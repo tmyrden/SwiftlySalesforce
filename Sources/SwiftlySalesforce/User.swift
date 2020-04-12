@@ -9,8 +9,8 @@ import Foundation
 
 public struct User: Codable {
     
-    let userID: String
-    let orgID: String
+    public let userID: String
+    public let orgID: String
     
     public init(userID: String, orgID: String) {
         self.userID = userID
