@@ -103,11 +103,15 @@ extension Salesforce {
         }
         .tryCatch { (error) -> AnyPublisher<Credential, Error> in
             // Attempt to refresh credential failed...
+            if let invalidCred = credential {
+                // ...so remove invalid credential from store
+                try? self.credentialStore.clear(credential: invalidCred)
+            }
             guard authenticateIfRequired else {
                 // Caller doesn't want to authenticate, so just re-throw error
                 throw error
             }
-            // ...so authenticate
+            // Authenticate
             return self.oAuthManager.authenticate()
         }
         .map { (newCred) -> Credential in
