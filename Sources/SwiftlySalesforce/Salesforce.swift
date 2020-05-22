@@ -35,11 +35,13 @@ open class Salesforce {
         public var authenticateIfRequired: Bool
         public var retries: Int
         
-        public static let shared = RequestConfig(
-            version: "48.0",
-            session: URLSession.shared,
-            authenticateIfRequired: true,
-            retries: 0
+        public static let shared = RequestConfig()
+        
+        public init(
+            version: String = "49.0",
+            session: URLSession = .shared,
+            authenticateIfRequired: Bool = true,
+            retries: Int = 0
         )
     }
      
