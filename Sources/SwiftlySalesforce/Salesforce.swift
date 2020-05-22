@@ -42,7 +42,12 @@ open class Salesforce {
             session: URLSession = .shared,
             authenticateIfRequired: Bool = true,
             retries: Int = 0
-        )
+        ) {
+            self.version = version
+            self.session = session
+            self.authenticateIfRequired = authenticateIfRequired
+            self.retries = retries
+        }
     }
      
     // MARK: - Initializers -
