@@ -15,7 +15,7 @@ public struct ConnectedApp {
     let consumerKey: String
     let callbackURL: URL
     
-    static var `default`: ConnectedApp? {
+    public static var `default`: ConnectedApp? {
         if let consumerKey = Bundle.main.object(forInfoDictionaryKey: "ConsumerKey") as? String,
             let callbackURLString = Bundle.main.object(forInfoDictionaryKey: "CallbackURL") as? String,
             let callbackURL = URL(string: callbackURLString) {
