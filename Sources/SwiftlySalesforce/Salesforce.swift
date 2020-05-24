@@ -35,7 +35,7 @@ open class Salesforce {
         public var authenticateIfRequired: Bool
         public var retries: Int
         
-        public static let shared = RequestConfig()
+        public static let `default` = RequestConfig()
         
         public init(
             version: String = "49.0",
