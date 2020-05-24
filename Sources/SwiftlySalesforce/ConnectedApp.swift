@@ -16,14 +16,12 @@ public struct ConnectedApp {
     let callbackURL: URL
     
     public static var `default`: ConnectedApp? {
-        if let consumerKey = Bundle.main.object(forInfoDictionaryKey: "ConsumerKey") as? String,
+        guard let consumerKey = Bundle.main.object(forInfoDictionaryKey: "ConsumerKey") as? String,
             let callbackURLString = Bundle.main.object(forInfoDictionaryKey: "CallbackURL") as? String,
-            let callbackURL = URL(string: callbackURLString) {
-            return ConnectedApp(consumerKey: consumerKey, callbackURL: callbackURL)
-        }
-        else {
+            let callbackURL = URL(string: callbackURLString) else {
             return nil
         }
+        return ConnectedApp(consumerKey: consumerKey, callbackURL: callbackURL)
     }
     
     public init(consumerKey: String, callbackURL: URL) {
