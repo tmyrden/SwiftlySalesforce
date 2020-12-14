@@ -12,6 +12,8 @@ import Foundation
 public enum Endpoint {
         
     case retrieve(type: String, id: String, fields: [String]?, version: String)
+    case retrieveList(type: String, fields: [String]?, version: String)
+    case countList(type: String, version: String)
     case insert(type: String, data: Data, version: String)
     case update(type: String, id: String, data: Data, version: String)
     case delete(type: String, id: String, version: String)
@@ -23,6 +25,12 @@ public enum Endpoint {
         
     case describe(type: String, version: String)
     case describeGlobal(version: String)
+    case describeLayout(type: String, id: String, version: String)
+    case describeAllLayouts(type: String, version: String)
+    
+    case compactLayouts(type: String, version: String)
+    case primaryCompactLayout(type: String, version: String)
+    case searchLayouts(type: String, version: String)
         
     case identity(version: String)
         
@@ -45,6 +53,17 @@ extension Endpoint: URLRequestConvertible {
                 if let fields = fields { return ["fields": fields.joined(separator: ",")].asURLQueryItems() }
                 else { return nil }
             }()
+            return try request(credential: credential, urlComponents: comps)
+            
+        case let .retrieveList(type, fields, version):
+            var comps = URLComponents(withPath: "/services/data/v\(version)/query")
+            let queryFields: [String] = fields != nil ? fields! : ["Id"]
+            comps.queryItems = ["q": "SELECT \(queryFields.joined(separator: ", ")) FROM \(type)"].asURLQueryItems()
+            return try request(credential: credential, urlComponents: comps)
+            
+        case let .countList(type, version):
+            var comps = URLComponents(withPath: "/services/data/v\(version)/query")
+            comps.queryItems = ["q": "SELECT count() FROM \(type)"].asURLQueryItems()
             return try request(credential: credential, urlComponents: comps)
             
         case let .insert(type, data, version):
@@ -85,6 +104,27 @@ extension Endpoint: URLRequestConvertible {
             let comps = URLComponents(withPath: "/services/data/v\(version)/sobjects/")
             return try request(credential: credential, urlComponents: comps)
                     
+        case let .describeLayout(type, id, version):
+            let comps = URLComponents(withPath: "/services/data/v\(version)/sobjects/\(type)/describe/layouts/\(id)")
+            return try request(credential: credential, urlComponents: comps)
+        
+        case let .describeAllLayouts(type, version):
+            let comps = URLComponents(withPath: "/services/data/v\(version)/sobjects/\(type)/describe/layouts")
+            return try request(credential: credential, urlComponents: comps)
+            
+        case let .compactLayouts(type, version):
+            let comps = URLComponents(withPath: "/services/data/v\(version)/sobjects/\(type)/describe/compactLayouts")
+            return try request(credential: credential, urlComponents: comps)
+            
+        case let .primaryCompactLayout(type, version):
+            let comps = URLComponents(withPath: "/services/data/v\(version)/sobjects/\(type)/describe/compactLayouts/primary")
+            return try request(credential: credential, urlComponents: comps)
+            
+        case let .searchLayouts(type, version):
+            var comps = URLComponents(withPath: "/services/data/v\(version)/search/layout")
+            comps.queryItems = ["q": type].asURLQueryItems()
+            return try request(credential: credential, urlComponents: comps)
+            
         case let .identity(version):
             guard var comps = URLComponents(url: credential.identityURL, resolvingAgainstBaseURL: false) else {
                 throw URLError(URLError.badURL)

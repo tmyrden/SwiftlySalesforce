@@ -32,6 +32,29 @@ extension Salesforce {
         return request(requestConvertible: resource, config: config)
     }
     
+    public func retrieveList(object: String, fields: [String]? = nil, config: RequestConfig = .shared) -> AnyPublisher<[Record], Error> {
+        let resource = Endpoint.retrieveList(type: object, fields: fields, version: config.version)
+        return request(requestConvertible: resource, config: config)
+            .map { (result: QueryResult<Record>) -> [Record] in
+                return result.records
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    public func countList(object: String, config: RequestConfig = .shared) -> AnyPublisher<Int, Error> {
+        
+        struct CountResult: Decodable {
+            public let totalSize: Int
+        }
+        
+        let resource = Endpoint.countList(type: object, version: config.version)
+        return request(requestConvertible: resource, config: config)
+            .map { (result: CountResult) -> Int in
+                return result.totalSize
+            }
+            .eraseToAnyPublisher()
+    }
+    
     // MARK: - Insert record -
     
     /// Asynchronously creates a new record in Salesforce

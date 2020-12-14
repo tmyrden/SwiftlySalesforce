@@ -12,7 +12,7 @@ public struct PicklistItem: Decodable {
     
     public let isActive: Bool
     public let isDefault: Bool
-    public let label: String
+    public let label: String?
     public let value: String
     
     enum CodingKeys: String, CodingKey {
